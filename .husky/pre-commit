@@ -1,0 +1,16 @@
+branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+
+
+echo "🎨 Formatting and linting staged files..."
+pnpm exec lint-staged || {
+  echo "❌ lint-staged failed! Fix the errors above."
+  exit 1
+}
+
+echo "🔎 Checking TypeScript types..."
+pnpm --dir web type-check || {
+  echo "❌ TypeScript check failed! Fix the type errors above."
+  exit 1
+}
+
+echo "✅ All pre-commit checks passed!"

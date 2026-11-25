@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+build
+dist
+next-env.d.ts
+sanity.types.ts
+.sanity
+*.lock
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+.env*
+coverage
+.nyc_output

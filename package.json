@@ -1,0 +1,21 @@
+{
+  "name": "paragon",
+  "private": true,
+  "scripts": {
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.0"
+  },
+  "lint-staged": {
+    "web/**/*.{js,jsx,ts,tsx,mjs}": [
+      "pnpm --dir web exec eslint --fix",
+      "pnpm --dir web exec prettier --write"
+    ],
+    "web/**/*.{json,md,mdx,css,scss}": [
+      "pnpm --dir web exec prettier --write"
+    ]
+  },
+  "packageManager": "pnpm@11.5.2"
+}
