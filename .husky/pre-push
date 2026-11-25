@@ -1,0 +1,18 @@
+branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+protected_branches="main dev"
+
+for protected in $protected_branches; do
+  if [ "$branch" = "$protected" ]; then
+    echo "❌ Pushing directly to '$branch' is not allowed."
+    echo "   Please open a Pull Request instead."
+    exit 1
+  fi
+done
+
+echo "🏗️  Building project..."
+pnpm --dir web build || {
+  echo "❌ Build failed! Fix the build errors above before pushing."
+  exit 1
+}
+
+echo "✅ Build successful! Pushing to remote..."
