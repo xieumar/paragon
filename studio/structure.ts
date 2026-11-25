@@ -4,6 +4,7 @@ import type {StructureResolver} from 'sanity/structure'
 const SINGLETONS = [
   {type: 'siteSettings', title: 'Site settings'},
   {type: 'homePage', title: 'Home page'},
+  {type: 'aboutPage', title: 'About page'},
 ] as const
 
 export const SINGLETON_TYPES = SINGLETONS.map((singleton) => singleton.type)

@@ -7,9 +7,11 @@ export const homePage = defineType({
   type: 'document',
   groups: [
     {name: 'hero', title: 'Hero', default: true},
+    {name: 'about', title: 'About'},
     {name: 'services', title: 'Services'},
     {name: 'credibility', title: 'Stats & clients'},
     {name: 'testimonial', title: 'Testimonial'},
+    {name: 'faq', title: 'FAQ'},
     {name: 'cta', title: 'Closing call to action'},
     {name: 'seo', title: 'SEO'},
   ],
@@ -78,6 +80,48 @@ export const homePage = defineType({
             select: {title: 'headline', subtitle: 'layout', media: 'image'},
           },
         }),
+      ],
+    }),
+
+    defineField({
+      name: 'about',
+      title: 'About section',
+      type: 'object',
+      group: 'about',
+      description: 'Shown right after the hero. Leave the heading empty to hide the section.',
+      fields: [
+        defineField({
+          name: 'eyebrow',
+          title: 'Small label',
+          type: 'string',
+          validation: (rule) => rule.max(40),
+        }),
+        defineField({
+          name: 'heading',
+          type: 'string',
+          validation: (rule) => rule.max(100),
+        }),
+        defineField({
+          name: 'body',
+          title: 'Text',
+          type: 'text',
+          rows: 6,
+          description: 'Separate paragraphs with a blank line.',
+          validation: (rule) => rule.max(900),
+        }),
+        defineField({
+          name: 'highlights',
+          type: 'array',
+          description: 'Up to 4 short bullet points, e.g. "Senior team on every project".',
+          of: [defineArrayMember({type: 'string', validation: (rule) => rule.max(80)})],
+          validation: (rule) => rule.max(4),
+        }),
+        defineField({
+          name: 'image',
+          type: 'imageWithAlt',
+          description: 'Portrait or square works best.',
+        }),
+        defineField({name: 'cta', title: 'Button', type: 'cta'}),
       ],
     }),
 
@@ -154,6 +198,60 @@ export const homePage = defineType({
       type: 'reference',
       group: 'testimonial',
       to: [{type: 'testimonial'}],
+    }),
+
+    defineField({
+      name: 'faq',
+      title: 'FAQ section',
+      type: 'object',
+      group: 'faq',
+      description: 'Shown before the closing call to action. Leave the heading empty to hide it.',
+      fields: [
+        defineField({
+          name: 'eyebrow',
+          title: 'Small label',
+          type: 'string',
+          validation: (rule) => rule.max(40),
+        }),
+        defineField({
+          name: 'heading',
+          type: 'string',
+          validation: (rule) => rule.max(100),
+        }),
+        defineField({
+          name: 'intro',
+          title: 'Intro text',
+          type: 'text',
+          rows: 2,
+          validation: (rule) => rule.max(240),
+        }),
+        defineField({
+          name: 'items',
+          title: 'Questions',
+          type: 'array',
+          validation: (rule) => rule.max(10),
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'faqItem',
+              fields: [
+                defineField({
+                  name: 'question',
+                  type: 'string',
+                  validation: (rule) => rule.required().max(160),
+                }),
+                defineField({
+                  name: 'answer',
+                  type: 'text',
+                  rows: 4,
+                  validation: (rule) => rule.required().max(800),
+                }),
+              ],
+              preview: {select: {title: 'question', subtitle: 'answer'}},
+            }),
+          ],
+        }),
+      ],
     }),
 
     defineField({

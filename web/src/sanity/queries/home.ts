@@ -4,7 +4,7 @@ import { IMAGE_PROJECTION, SEO_PROJECTION } from "./fragments";
 import { SERVICE_CARD_PROJECTION } from "./services";
 
 const HOME_PAGE_QUERY = defineQuery(`
-  *[_id == "homePage"][0]{
+  *[_type == "homePage"] | order(_updatedAt desc)[0]{
     heroSlides[]{
       layout,
       eyebrow,
@@ -13,6 +13,14 @@ const HOME_PAGE_QUERY = defineQuery(`
       cta{ label, href },
       image{ ${IMAGE_PROJECTION} },
       badge
+    },
+    about{
+      eyebrow,
+      heading,
+      body,
+      highlights,
+      image{ ${IMAGE_PROJECTION} },
+      cta{ label, href }
     },
     servicesEyebrow,
     servicesHeading,
@@ -28,6 +36,7 @@ const HOME_PAGE_QUERY = defineQuery(`
       company,
       photo{ ${IMAGE_PROJECTION} }
     },
+    faq{ eyebrow, heading, intro, items[]{ question, answer } },
     ctaBand{ heading, text, cta{ label, href } },
     seo{ ${SEO_PROJECTION} }
   }
