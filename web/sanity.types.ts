@@ -75,6 +75,106 @@ export type ImageWithAlt = {
   alt?: string;
 };
 
+export type Service = {
+  _id: string;
+  _type: "service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  summary?: string;
+  image?: ImageWithAlt;
+  overview?: PortableText;
+  capabilities?: Array<string>;
+  processSteps?: Array<{
+    title?: string;
+    description?: string;
+    _type: "processStep";
+    _key: string;
+  }>;
+  order?: number;
+  seo?: Seo;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type ServiceReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "service";
+};
+
+export type TestimonialReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "testimonial";
+};
+
+export type HomePage = {
+  _id: string;
+  _type: "homePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heroSlides?: Array<{
+    layout?: "overlay" | "split";
+    eyebrow?: string;
+    headline?: string;
+    subcopy?: string;
+    cta?: Cta;
+    image?: ImageWithAlt;
+    badge?: string;
+    _type: "heroSlide";
+    _key: string;
+  }>;
+  servicesEyebrow?: string;
+  servicesHeading?: string;
+  servicesIntro?: string;
+  featuredServices?: Array<
+    {
+      _key: string;
+    } & ServiceReference
+  >;
+  stats?: Array<{
+    value?: string;
+    label?: string;
+    _type: "stat";
+    _key: string;
+  }>;
+  clientLogos?: Array<
+    {
+      _key: string;
+    } & ImageWithAlt
+  >;
+  featuredTestimonial?: TestimonialReference;
+  ctaBand?: {
+    heading?: string;
+    text?: string;
+    cta?: Cta;
+  };
+  seo?: Seo;
+};
+
+export type Testimonial = {
+  _id: string;
+  _type: "testimonial";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  quote?: string;
+  name?: string;
+  role?: string;
+  company?: string;
+  photo?: ImageWithAlt;
+};
+
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
@@ -271,12 +371,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type AllSanitySchemaTypes =
   | PortableText
   | Seo
@@ -284,6 +378,12 @@ export type AllSanitySchemaTypes =
   | Link
   | SanityImageAssetReference
   | ImageWithAlt
+  | Service
+  | Slug
+  | ServiceReference
+  | TestimonialReference
+  | HomePage
+  | Testimonial
   | SiteSettings
   | SanityImageCrop
   | SanityImageHotspot
@@ -296,8 +396,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint
-  | Slug;
+  | Geopoint;
 
 // Source: ../web/src/sanity/queries/siteSettings.ts
 // Variable: SITE_SETTINGS_QUERY

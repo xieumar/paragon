@@ -28,7 +28,11 @@ export type SiteSettings = Awaited<ReturnType<typeof getSiteSettings>>;
  */
 export async function getSiteSettings() {
   try {
-    const { data } = await cachedSanity({ query: SITE_SETTINGS_QUERY });
+    const { data } = await cachedSanity({
+      query: SITE_SETTINGS_QUERY,
+      perspective: "published",
+      stega: false,
+    });
     return data;
   } catch (error) {
     console.error("Failed to load site settings from Sanity:", error);

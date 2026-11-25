@@ -82,6 +82,41 @@
   --radius: 0.75rem;
 }
 
+/*
+ * Slim themed scrollbar: navy thumb on a light track, orange on hover.
+ * Standard properties cover Firefox; the ::-webkit-scrollbar rules cover
+ * Chrome, Edge and Safari (and are skipped where unsupported).
+ */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--navy) var(--secondary);
+}
+
+@supports selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--secondary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--navy);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--cta);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

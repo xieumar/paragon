@@ -39,7 +39,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           </main>
           <SiteFooter settings={settings} />
         </MotionProvider>
-        <SanityLive />
+        <SanityLive includeDrafts={false} />
       </body>
     </html>
   );
