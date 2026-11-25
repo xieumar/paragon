@@ -1,26 +1,101 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Apply `hover:` styles on any :hover. Tailwind v4 wraps them in
+ * `@media (hover: hover)`, which some Windows laptops (touchscreen/pen)
+ * don't satisfy, leaving hover effects dead for mouse users.
+ */
+@custom-variant hover (&:hover);
+
+/*
+ * Paragon design tokens.
+ * Direction: deep navy base, white surfaces, ONE warm accent for CTAs.
+ * No purple, no gradients. Light theme only (dark hero overlays are
+ * achieved with navy overlays, not a dark colour scheme).
+ * Colours are oklch; values marked (confirm) await final brand colours.
+ */
 
 @theme inline {
+  --font-sans: var(--font-jakarta);
+  --font-heading: var(--font-jakarta);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand */
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --navy: oklch(0.24 0.07 262); /* (confirm) */
+  --navy-foreground: oklch(0.985 0 0);
+  --cta: oklch(0.58 0.17 41); /* warm orange (confirm) */
+  --cta-foreground: oklch(0.99 0 0);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.24 0.07 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.07 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.07 262);
+  --primary: oklch(0.24 0.07 262);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.96 0.008 262);
+  --secondary-foreground: oklch(0.24 0.07 262);
+  --muted: oklch(0.96 0.008 262);
+  --muted-foreground: oklch(0.5 0.03 262);
+  --accent: oklch(0.96 0.008 262);
+  --accent-foreground: oklch(0.24 0.07 262);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.92 0.01 262);
+  --input: oklch(0.92 0.01 262);
+  --ring: oklch(0.58 0.17 41);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading tracking-tight;
+  }
 }
