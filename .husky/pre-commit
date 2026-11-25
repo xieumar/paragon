@@ -1,5 +1,9 @@
 branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
-
+if [ "$branch" = "main" ] || [ "$branch" = "dev" ]; then
+  echo "❌ Direct commits to '$branch' are not allowed."
+  echo "   Please create a feature/fix branch."
+  exit 1
+fi
 
 echo "🎨 Formatting and linting staged files..."
 pnpm exec lint-staged || {
