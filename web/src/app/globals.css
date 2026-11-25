@@ -3,6 +3,13 @@
 @import "shadcn/tailwind.css";
 
 /*
+ * Apply `hover:` styles on any :hover. Tailwind v4 wraps them in
+ * `@media (hover: hover)`, which some Windows laptops (touchscreen/pen)
+ * don't satisfy, leaving hover effects dead for mouse users.
+ */
+@custom-variant hover (&:hover);
+
+/*
  * Paragon design tokens.
  * Direction: deep navy base, white surfaces, ONE warm accent for CTAs.
  * No purple, no gradients. Light theme only (dark hero overlays are

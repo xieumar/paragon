@@ -26,7 +26,7 @@ const swatches = [
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-5xl space-y-16 px-6 py-16">
+    <div className="mx-auto w-full max-w-5xl space-y-16 px-6 py-16">
       <section className="rounded-3xl bg-navy p-10 text-navy-foreground sm:p-16">
         <Badge variant="secondary">On demand live support</Badge>
         <Heading as="h1" size="display" className="mt-6">
@@ -129,6 +129,6 @@ export default function Home() {
         <Skeleton className="h-6 w-2/3" />
         <Skeleton className="h-6 w-1/2" />
       </section>
-    </main>
+    </div>
   );
 }

@@ -63,6 +63,14 @@ export const siteSettings = defineType({
               validation: (rule) => rule.required(),
             }),
             defineField({
+              name: 'text',
+              title: 'Text',
+              type: 'text',
+              rows: 4,
+              description:
+                'Optional free text shown under the column title, e.g. an address. Line breaks are kept.',
+            }),
+            defineField({
               name: 'links',
               type: 'array',
               of: [defineArrayMember({type: 'link'})],

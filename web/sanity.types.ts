@@ -92,6 +92,7 @@ export type SiteSettings = {
   >;
   footerColumns?: Array<{
     title?: string;
+    text?: string;
     links?: Array<
       {
         _key: string;
@@ -300,7 +301,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/sanity/queries/siteSettings.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_id == "siteSettings"][0]{    siteName,    tagline,    logo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    headerCta{ label, href },    navigation[]{ label, href },    footerColumns[]{ title, links[]{ label, href } },    legalLinks[]{ label, href },    contact{ email, phone, address },    socials[]{ platform, url },    defaultSeo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+// Query: *[_id == "siteSettings"][0]{    siteName,    tagline,    logo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    headerCta{ label, href },    navigation[]{ label, href },    footerColumns[]{ title, text, links[]{ label, href } },    legalLinks[]{ label, href },    contact{ email, phone, address },    socials[]{ platform, url },    defaultSeo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
 export type SITE_SETTINGS_QUERY_RESULT =
   | {
       siteName: null;
@@ -344,6 +345,7 @@ export type SITE_SETTINGS_QUERY_RESULT =
       }> | null;
       footerColumns: Array<{
         title: string | null;
+        text: string | null;
         links: Array<{
           label: string | null;
           href: string | null;
@@ -391,7 +393,7 @@ export type SITE_SETTINGS_QUERY_RESULT =
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n  *[_id == "siteSettings"][0]{\n    siteName,\n    tagline,\n    logo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    headerCta{ label, href },\n    navigation[]{ label, href },\n    footerColumns[]{ title, links[]{ label, href } },\n    legalLinks[]{ label, href },\n    contact{ email, phone, address },\n    socials[]{ platform, url },\n    defaultSeo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_id == "siteSettings"][0]{\n    siteName,\n    tagline,\n    logo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    headerCta{ label, href },\n    navigation[]{ label, href },\n    footerColumns[]{ title, text, links[]{ label, href } },\n    legalLinks[]{ label, href },\n    contact{ email, phone, address },\n    socials[]{ platform, url },\n    defaultSeo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
