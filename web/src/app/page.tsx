@@ -1,69 +1,134 @@
-import Image from "next/image";
+// TEMPORARY design-system showcase. PR 2 replaces this with the real home page.
+// Do not commit.
+import { ArrowRight } from "lucide-react";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Heading,
+  Separator,
+  Skeleton,
+} from "@/components/ui";
+
+const swatches = [
+  { name: "navy", className: "bg-navy" },
+  { name: "cta", className: "bg-cta" },
+  { name: "primary", className: "bg-primary" },
+  { name: "secondary", className: "bg-secondary" },
+  { name: "muted", className: "bg-muted" },
+  { name: "border", className: "bg-border" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="mx-auto w-full max-w-5xl space-y-16 px-6 py-16">
+      <section className="rounded-3xl bg-navy p-10 text-navy-foreground sm:p-16">
+        <Badge variant="secondary">On demand live support</Badge>
+        <Heading as="h1" size="display" className="mt-6">
+          Delivering creative digital products
+        </Heading>
+        <p className="mt-6 max-w-xl text-lg text-navy-foreground/70">
+          We&apos;re a fully dedicated corporate service agency collaborating
+          with brands all over the world.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Button variant="cta" size="xl">
+            Get started now
+            <span className="flex size-8 items-center justify-center rounded-full bg-white text-navy">
+              <ArrowRight className="size-4" />
+            </span>
+          </Button>
+          <Button
+            variant="outline"
+            size="xl"
+            className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
+          >
+            Send a message
+          </Button>
+        </div>
+      </section>
+
+      <Reveal>
+        <Heading size="h2">Colour tokens</Heading>
+        <div className="mt-6 grid grid-cols-3 gap-4 sm:grid-cols-6">
+          {swatches.map((s) => (
+            <div key={s.name}>
+              <div className={`h-16 rounded-xl border ${s.className}`} />
+              <p className="mt-2 text-xs text-muted-foreground">{s.name}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+
+      <section>
+        <Heading size="h2">Type scale</Heading>
+        <div className="mt-6 space-y-4">
+          <Heading as="h2" size="display">
+            Display heading
+          </Heading>
+          <Heading as="h2" size="h1">
+            Heading one
+          </Heading>
+          <Heading as="h3" size="h2">
+            Heading two
+          </Heading>
+          <Heading as="h4" size="h3">
+            Heading three
+          </Heading>
+          <p className="text-muted-foreground">
+            Body copy in muted foreground. Plus Jakarta Sans across the site.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section>
+        <Heading size="h2">Buttons</Heading>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Button>Default</Button>
+          <Button variant="cta">CTA</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="link">Link</Button>
+          <Button size="lg" variant="cta">
+            Large CTA
+          </Button>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section>
+        <Heading size="h2">Cards (staggered reveal)</Heading>
+        <Stagger className="mt-6 grid gap-4 sm:grid-cols-3">
+          {["Strategy", "Design", "Delivery"].map((title) => (
+            <StaggerItem key={title}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>{title}</CardTitle>
+                  <CardDescription>
+                    Short supporting description for this service.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Badge>Featured</Badge>
+                </CardContent>
+              </Card>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </section>
+
+      <Separator />
+
+      <section className="space-y-3">
+        <Heading size="h3">Skeleton loading</Heading>
+        <Skeleton className="h-6 w-2/3" />
+        <Skeleton className="h-6 w-1/2" />
+      </section>
+    </main>
   );
 }
