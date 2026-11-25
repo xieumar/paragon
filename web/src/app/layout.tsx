@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/components/motion";
+import { SITE_URL } from "@/constants";
 import { SanityLive } from "@/sanity/lib/live";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -10,6 +11,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Paragon",
   description: "Paragon corporate website",
 };

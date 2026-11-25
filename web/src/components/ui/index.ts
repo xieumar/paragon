@@ -3,6 +3,8 @@ export * from "./button";
 export * from "./card";
 export * from "./Heading";
 export * from "./navigation-menu";
+export * from "./RichText";
+export * from "./SanityImage";
 export * from "./separator";
 export * from "./sheet";
 export * from "./skeleton";

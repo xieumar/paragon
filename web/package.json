@@ -13,6 +13,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@sanity/client": "^8.17.0",
     "@sanity/image-url": "^2.2.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",

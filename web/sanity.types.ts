@@ -297,3 +297,104 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint
   | Slug;
+
+// Source: ../web/src/sanity/queries/siteSettings.ts
+// Variable: SITE_SETTINGS_QUERY
+// Query: *[_id == "siteSettings"][0]{    siteName,    tagline,    logo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    headerCta{ label, href },    navigation[]{ label, href },    footerColumns[]{ title, links[]{ label, href } },    legalLinks[]{ label, href },    contact{ email, phone, address },    socials[]{ platform, url },    defaultSeo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type SITE_SETTINGS_QUERY_RESULT =
+  | {
+      siteName: null;
+      tagline: null;
+      logo: null;
+      headerCta: null;
+      navigation: null;
+      footerColumns: null;
+      legalLinks: null;
+      contact: null;
+      socials: null;
+      defaultSeo: null;
+    }
+  | {
+      siteName: string | null;
+      tagline: string | null;
+      logo: {
+        asset: SanityImageAssetReference | null;
+        alt: string | "";
+        width: number | null;
+        height: number | null;
+        lqip: string | null;
+        hotspot: {
+          x: number | null;
+          y: number | null;
+        } | null;
+        crop: {
+          top: number | null;
+          bottom: number | null;
+          left: number | null;
+          right: number | null;
+        } | null;
+      } | null;
+      headerCta: {
+        label: string | null;
+        href: string | null;
+      } | null;
+      navigation: Array<{
+        label: string | null;
+        href: string | null;
+      }> | null;
+      footerColumns: Array<{
+        title: string | null;
+        links: Array<{
+          label: string | null;
+          href: string | null;
+        }> | null;
+      }> | null;
+      legalLinks: Array<{
+        label: string | null;
+        href: string | null;
+      }> | null;
+      contact: {
+        email: string | null;
+        phone: string | null;
+        address: string | null;
+      } | null;
+      socials: Array<{
+        platform:
+          "Facebook" | "Instagram" | "LinkedIn" | "X" | "YouTube" | null;
+        url: string | null;
+      }> | null;
+      defaultSeo: {
+        title: string | null;
+        description: string | null;
+        noindex: boolean | null;
+        image: {
+          asset: SanityImageAssetReference | null;
+          alt: string | "";
+          width: number | null;
+          height: number | null;
+          lqip: string | null;
+          hotspot: {
+            x: number | null;
+            y: number | null;
+          } | null;
+          crop: {
+            top: number | null;
+            bottom: number | null;
+            left: number | null;
+            right: number | null;
+          } | null;
+        } | null;
+      } | null;
+    }
+  | null;
+
+// Query TypeMap
+declare global {
+  interface SanityQueries {
+    '\n  *[_id == "siteSettings"][0]{\n    siteName,\n    tagline,\n    logo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    headerCta{ label, href },\n    navigation[]{ label, href },\n    footerColumns[]{ title, links[]{ label, href } },\n    legalLinks[]{ label, href },\n    contact{ email, phone, address },\n    socials[]{ platform, url },\n    defaultSeo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+  }
+}
+// Lets @sanity/client releases that predate the global registry read it too
+declare module "@sanity/client" {
+  interface SanityQueries extends globalThis.SanityQueries {}
+}

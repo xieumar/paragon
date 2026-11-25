@@ -2,14 +2,16 @@
 // Hand-written shared CMS shapes. Document-specific types come from TypeGen
 // (`sanity.types.ts`) once schemas exist.
 
-/** An image field projected by our shared image fragment. */
+/** An image field projected by `IMAGE_PROJECTION` (see `@/sanity/queries`). */
 interface SanityImage {
-  url: string;
+  asset: { _ref: string; _type: "reference" };
   alt: string;
   width: number;
   height: number;
   /** Low-quality image placeholder (base64) for blur-up loading. */
   lqip?: string;
+  hotspot?: { x: number; y: number };
+  crop?: { top: number; bottom: number; left: number; right: number };
 }
 
 /** Shared SEO object projected from the `seo` schema object. */
