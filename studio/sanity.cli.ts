@@ -13,6 +13,8 @@ export default defineCliConfig({
     overloadClientMethods: true,
   },
   deployment: {
+    /** Hosted Studio (sanity.studio) this project deploys to. */
+    appId: 'ngv3nhvuynjb3f61dsfyjrl8',
     /**
      * Enable auto-updates for studios.
      * Learn more at https://www.sanity.io/docs/studio/latest-version-of-sanity#k47faf43faf56
