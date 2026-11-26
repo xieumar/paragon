@@ -75,6 +75,24 @@ export type ImageWithAlt = {
   alt?: string;
 };
 
+export type Enquiry = {
+  _id: string;
+  _type: "enquiry";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  status?: "new" | "read" | "replied";
+  name?: string;
+  email?: string;
+  company?: string;
+  phone?: string;
+  service?: string;
+  message?: string;
+  consent?: boolean;
+  submittedAt?: string;
+  sourceUrl?: string;
+};
+
 export type TeamMember = {
   _id: string;
   _type: "teamMember";
@@ -115,6 +133,27 @@ export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
+};
+
+export type ContactPage = {
+  _id: string;
+  _type: "contactPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  header?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+  };
+  form?: {
+    heading?: string;
+    submitLabel?: string;
+    consentLabel?: string;
+    successTitle?: string;
+    successMessage?: string;
+  };
+  seo?: Seo;
 };
 
 export type TeamMemberReference = {
@@ -481,9 +520,11 @@ export type AllSanitySchemaTypes =
   | Link
   | SanityImageAssetReference
   | ImageWithAlt
+  | Enquiry
   | TeamMember
   | Service
   | Slug
+  | ContactPage
   | TeamMemberReference
   | AboutPage
   | ServiceReference
@@ -689,6 +730,46 @@ export type TEAM_MEMBERS_QUERY_RESULT = Array<{
     } | null;
   } | null;
 }>;
+
+// Source: ../web/src/sanity/queries/contact.ts
+// Variable: CONTACT_PAGE_QUERY
+// Query: *[_type == "contactPage"] | order(_updatedAt desc)[0]{    header{ eyebrow, heading, intro },    form{ heading, submitLabel, consentLabel, successTitle, successMessage },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type CONTACT_PAGE_QUERY_RESULT = {
+  header: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+  } | null;
+  form: {
+    heading: string | null;
+    submitLabel: string | null;
+    consentLabel: string | null;
+    successTitle: string | null;
+    successMessage: string | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    noindex: boolean | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
 
 // Source: ../web/src/sanity/queries/home.ts
 // Variable: HOME_PAGE_QUERY
@@ -1070,6 +1151,7 @@ declare global {
   interface SanityQueries {
     '\n  *[_type == "aboutPage"] | order(_updatedAt desc)[0]{\n    header{\n      eyebrow,\n      heading,\n      intro,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    story{\n      eyebrow,\n      heading,\n      body[]{ \n  ...,\n  _type == "imageWithAlt" => { \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n    },\n    values{\n      eyebrow,\n      heading,\n      items[]{ icon, title, description }\n    },\n    team{\n      eyebrow,\n      heading,\n      intro,\n      members[]->{\n        _id,\n        name,\n        role,\n        bio,\n        linkedin,\n        photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n      }\n    },\n    ctaBand{ heading, text, cta{ label, href } },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_type == "teamMember"] | order(coalesce(order, 100) asc, name asc){\n    _id,\n    name,\n    role,\n    bio,\n    linkedin,\n    photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n  }\n': TEAM_MEMBERS_QUERY_RESULT;
+    '\n  *[_type == "contactPage"] | order(_updatedAt desc)[0]{\n    header{ eyebrow, heading, intro },\n    form{ heading, submitLabel, consentLabel, successTitle, successMessage },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': CONTACT_PAGE_QUERY_RESULT;
     '\n  *[_type == "homePage"] | order(_updatedAt desc)[0]{\n    heroSlides[]{\n      layout,\n      eyebrow,\n      headline,\n      subcopy,\n      cta{ label, href },\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n      badge\n    },\n    about{\n      eyebrow,\n      heading,\n      body,\n      highlights,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n      cta{ label, href }\n    },\n    servicesEyebrow,\n    servicesHeading,\n    servicesIntro,\n    featuredServices[]->{ \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n },\n    stats[]{ value, label },\n    clientLogos[]{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    featuredTestimonial->{\n      _id,\n      quote,\n      name,\n      role,\n      company,\n      photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    faq{ eyebrow, heading, intro, items[]{ question, answer } },\n    ctaBand{ heading, text, cta{ label, href } },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': HOME_PAGE_QUERY_RESULT;
     '\n  *[_type == "service" && defined(slug.current)]\n    | order(coalesce(order, 100) asc, title asc){\n    \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n\n  }\n': SERVICES_QUERY_RESULT;
     '\n  *[_type == "service" && slug.current == $slug][0]{\n    \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n,\n    overview[]{ \n  ...,\n  _type == "imageWithAlt" => { \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n },\n    capabilities,\n    processSteps[]{ title, description },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SERVICE_QUERY_RESULT;
