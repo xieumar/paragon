@@ -8,7 +8,7 @@
  */
 import {getCliClient} from 'sanity/cli'
 
-const SINGLETON_TYPES = ['siteSettings', 'homePage', 'aboutPage', 'contactPage']
+const SINGLETON_TYPES = ['siteSettings', 'homePage', 'aboutPage', 'servicesPage', 'contactPage']
 const client = getCliClient({apiVersion: '2025-01-01'})
 
 async function main() {

@@ -135,6 +135,26 @@ export type Slug = {
   source?: string;
 };
 
+export type ServicesPage = {
+  _id: string;
+  _type: "servicesPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  header?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+    image?: ImageWithAlt;
+  };
+  ctaBand?: {
+    heading?: string;
+    text?: string;
+    cta?: Cta;
+  };
+  seo?: Seo;
+};
+
 export type ContactPage = {
   _id: string;
   _type: "contactPage";
@@ -524,6 +544,7 @@ export type AllSanitySchemaTypes =
   | TeamMember
   | Service
   | Slug
+  | ServicesPage
   | ContactPage
   | TeamMemberReference
   | AboutPage
@@ -1070,6 +1091,64 @@ export type SERVICE_SLUGS_QUERY_RESULT = Array<{
   slug: string;
 }>;
 
+// Source: ../web/src/sanity/queries/servicesPage.ts
+// Variable: SERVICES_PAGE_QUERY
+// Query: *[_type == "servicesPage"] | order(_updatedAt desc)[0]{    header{      eyebrow,      heading,      intro,      image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }    },    ctaBand{ heading, text, cta{ label, href } },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type SERVICES_PAGE_QUERY_RESULT = {
+  header: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+  ctaBand: {
+    heading: string | null;
+    text: string | null;
+    cta: {
+      label: string | null;
+      href: string | null;
+    } | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    noindex: boolean | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
+
 // Source: ../web/src/sanity/queries/siteSettings.ts
 // Variable: SITE_SETTINGS_QUERY
 // Query: *[_type == "siteSettings"] | order(_updatedAt desc)[0]{    siteName,    tagline,    logo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    headerCta{ label, href },    navigation[]{ label, href },    footerColumns[]{ title, text, links[]{ label, href } },    legalLinks[]{ label, href },    contact{ email, phone, address },    socials[]{ platform, url },    defaultSeo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
@@ -1156,6 +1235,7 @@ declare global {
     '\n  *[_type == "service" && defined(slug.current)]\n    | order(coalesce(order, 100) asc, title asc){\n    \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n\n  }\n': SERVICES_QUERY_RESULT;
     '\n  *[_type == "service" && slug.current == $slug][0]{\n    \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n,\n    overview[]{ \n  ...,\n  _type == "imageWithAlt" => { \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n },\n    capabilities,\n    processSteps[]{ title, description },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SERVICE_QUERY_RESULT;
     '\n  *[_type == "service" && defined(slug.current)]{ "slug": slug.current }\n': SERVICE_SLUGS_QUERY_RESULT;
+    '\n  *[_type == "servicesPage"] | order(_updatedAt desc)[0]{\n    header{\n      eyebrow,\n      heading,\n      intro,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    ctaBand{ heading, text, cta{ label, href } },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SERVICES_PAGE_QUERY_RESULT;
     '\n  *[_type == "siteSettings"] | order(_updatedAt desc)[0]{\n    siteName,\n    tagline,\n    logo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    headerCta{ label, href },\n    navigation[]{ label, href },\n    footerColumns[]{ title, text, links[]{ label, href } },\n    legalLinks[]{ label, href },\n    contact{ email, phone, address },\n    socials[]{ platform, url },\n    defaultSeo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }
 }

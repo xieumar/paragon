@@ -5,6 +5,7 @@ const SINGLETONS = [
   {type: 'siteSettings', title: 'Site settings'},
   {type: 'homePage', title: 'Home page'},
   {type: 'aboutPage', title: 'About page'},
+  {type: 'servicesPage', title: 'Services page'},
   {type: 'contactPage', title: 'Contact page'},
 ] as const
 
