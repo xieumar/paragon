@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout";
 import { Parallax, Reveal, TextReveal } from "@/components/motion";
 import { SanityImage } from "@/components/ui";
+import { cn } from "@/lib";
 import { toImage, type ImageInput } from "@/sanity/image";
 
 export interface PageHeroData {
@@ -11,12 +12,18 @@ export interface PageHeroData {
 }
 
 /** Header at the top of an inner page: label, animated title, intro and photo. */
-export function PageHero({ data }: { data: PageHeroData | null | undefined }) {
+export function PageHero({
+  data,
+  className,
+}: {
+  data: PageHeroData | null | undefined;
+  className?: string;
+}) {
   if (!data?.heading) return null;
   const image = toImage(data.image);
 
   return (
-    <section className="pb-8 pt-12 sm:pt-16 lg:pt-20">
+    <section className={cn("pb-8 pt-12 sm:pt-16 lg:pt-20", className)}>
       <Container>
         <div
           className={

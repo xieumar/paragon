@@ -9,7 +9,9 @@ export const servicesPage = defineType({
   readOnly: singletonReadOnly('servicesPage'),
   groups: [
     {name: 'header', title: 'Header', default: true},
+    {name: 'faq', title: 'FAQ'},
     {name: 'cta', title: 'Closing call to action'},
+    {name: 'extra', title: 'More sections'},
     {name: 'seo', title: 'SEO'},
   ],
   fields: [
@@ -48,21 +50,37 @@ export const servicesPage = defineType({
     }),
 
     defineField({
-      name: 'ctaBand',
+      name: 'testimonialBlock',
+      title: 'Testimonials',
+      type: 'reference',
+      to: [{type: 'testimonialBlock'}],
+      group: 'extra',
+      description: 'Pick a testimonial slider. Leave empty to hide it.',
+    }),
+    defineField({
+      name: 'logoBlock',
+      title: 'Client logos',
+      type: 'reference',
+      to: [{type: 'logoBlock'}],
+      group: 'extra',
+      description: 'Pick a logo banner to show here. Leave empty to hide it.',
+    }),
+    defineField({
+      name: 'faqBlock',
+      title: 'FAQ',
+      type: 'reference',
+      to: [{type: 'faqBlock'}],
+      group: 'faq',
+      description:
+        'Pick a FAQ set to show here. Create or edit sets under "Reusable blocks" in the sidebar. Leave empty to hide this section.',
+    }),
+    defineField({
+      name: 'ctaBlock',
       title: 'Closing call to action',
-      type: 'object',
+      type: 'reference',
+      to: [{type: 'ctaBlock'}],
       group: 'cta',
-      description: 'Shown at the bottom of /services and of every individual service page.',
-      fields: [
-        defineField({name: 'heading', type: 'string', validation: (rule) => rule.max(80)}),
-        defineField({
-          name: 'text',
-          type: 'text',
-          rows: 2,
-          validation: (rule) => rule.max(200),
-        }),
-        defineField({name: 'cta', title: 'Button', type: 'cta'}),
-      ],
+      description: 'Pick the closing call to action. Leave empty to hide it.',
     }),
 
     defineField({name: 'seo', type: 'seo', group: 'seo'}),

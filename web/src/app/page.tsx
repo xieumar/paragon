@@ -60,7 +60,7 @@ export default async function HomePage() {
           services={home.featuredServices}
         />
       )}
-      <Testimonial testimonial={home.featuredTestimonial} />
+      <Testimonial data={home.testimonials} />
       {home.clientLogos && <LogoStrip logos={home.clientLogos} />}
 
       <Faq data={home.faq} />

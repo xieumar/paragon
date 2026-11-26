@@ -1,5 +1,6 @@
 export * from "./About";
 export * from "./Capabilities";
+export * from "./ContactDetails";
 export * from "./CtaBand";
 export * from "./Faq";
 export * from "./Hero";

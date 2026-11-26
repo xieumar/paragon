@@ -22,7 +22,10 @@ export function SanityImage({
   sizes,
   ...props
 }: SanityImageProps) {
-  const src = urlFor(image).width(image.width).auto("format").url();
+  const src = urlFor(image)
+    .width(Math.min(image.width, 2000))
+    .auto("format")
+    .url();
   const objectPosition = image.hotspot
     ? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%`
     : undefined;

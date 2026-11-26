@@ -25,8 +25,11 @@ export function ServiceShowcase({
   intro,
   services,
 }: ServiceShowcaseProps) {
+  // The same service may have been picked twice in the Studio; show it once.
+  const seen = new Set<string>();
   const items = services.flatMap((service): ServiceShowcaseItem[] => {
-    if (!service.title || !service.slug) return [];
+    if (!service.title || !service.slug || seen.has(service._id)) return [];
+    seen.add(service._id);
     const image = toImage(service.image);
     return [
       {

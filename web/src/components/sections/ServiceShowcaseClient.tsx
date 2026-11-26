@@ -4,7 +4,8 @@ import { useId, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Button, Heading } from "@/components/ui";
+import { Button } from "@/components/ui/button";
+import { Heading } from "@/components/ui/Heading";
 import { ROUTES } from "@/constants";
 import { cn } from "@/lib";
 

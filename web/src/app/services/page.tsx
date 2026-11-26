@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/layout";
-import { CtaBand, PageHero, ServiceList } from "@/components/sections";
+import {
+  CtaBand,
+  Faq,
+  LogoStrip,
+  PageHero,
+  ServiceList,
+  Testimonial,
+} from "@/components/sections";
 import { Heading } from "@/components/ui";
 import { buildMetadata, toSeo } from "@/lib/seo";
 import {
@@ -50,7 +57,10 @@ export default async function ServicesPage() {
   return (
     <>
       <PageHero data={page.header} />
+      {page.clientLogos && <LogoStrip logos={page.clientLogos} />}
       <ServiceList services={services} />
+      <Testimonial data={page.testimonials} />
+      <Faq data={page.faq} />
       <CtaBand data={page.ctaBand} />
     </>
   );

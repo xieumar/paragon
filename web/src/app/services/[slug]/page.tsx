@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Container, Section } from "@/components/layout";
+import { Suspense } from "react";
+import { BackLink, Container, Section } from "@/components/layout";
 import { Reveal } from "@/components/motion";
 import {
   Capabilities,
@@ -9,7 +10,8 @@ import {
   ProcessSteps,
   SectionHeading,
 } from "@/components/sections";
-import { RichText } from "@/components/ui";
+import { RichText, Skeleton } from "@/components/ui";
+import { ROUTES } from "@/constants";
 import { buildMetadata, toSeo } from "@/lib/seo";
 import {
   getService,
@@ -45,7 +47,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default async function ServicePage({ params }: Props) {
+/**
+ * `params` is request data, so it is read inside a Suspense boundary (required
+ * by `cacheComponents`); known services are still generated ahead of time.
+ */
+export default function ServicePage({ params }: Props) {
+  return (
+    <Suspense fallback={<ServicePageSkeleton />}>
+      <ServiceContent params={params} />
+    </Suspense>
+  );
+}
+
+async function ServiceContent({ params }: Props) {
   const { slug } = await params;
   const [service, servicesPage] = await Promise.all([
     getService(slug),
@@ -60,7 +74,9 @@ export default async function ServicePage({ params }: Props) {
 
   return (
     <>
+      <BackLink href={ROUTES.services}>All services</BackLink>
       <PageHero
+        className="pt-6 sm:pt-8 lg:pt-10"
         data={{
           eyebrow: "Service",
           heading: service.title,
@@ -95,5 +111,17 @@ export default async function ServicePage({ params }: Props) {
       <ProcessSteps steps={service.processSteps} />
       <CtaBand data={servicesPage?.ctaBand} />
     </>
+  );
+}
+
+/** Shown while the service loads: header-shaped placeholders. */
+function ServicePageSkeleton() {
+  return (
+    <Container className="space-y-6 py-16" aria-busy="true">
+      <Skeleton className="h-8 w-32" />
+      <Skeleton className="h-16 w-3/4" />
+      <Skeleton className="h-6 w-1/2" />
+      <Skeleton className="mt-10 aspect-[4/3] w-full max-w-xl rounded-3xl" />
+    </Container>
   );
 }

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
-  Button,
   Sheet,
   SheetClose,
   SheetContent,
@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui";
+} from "@/components/ui/sheet";
 import { SiteLink } from "./SiteLink";
 
 /** Slide-in navigation for small screens (focus-trapped, closes on Escape). */

@@ -11,7 +11,7 @@ import Image from "next/image";
 import { AnimatePresence, useReducedMotion } from "motion/react";
 import * as m from "motion/react-m";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Heading } from "@/components/ui";
+import { Heading } from "@/components/ui/Heading";
 import { cn } from "@/lib";
 
 const AUTOPLAY_MS = 7000;

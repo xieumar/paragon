@@ -1,6 +1,12 @@
 import { defineQuery } from "next-sanity";
 import { cachedSanity } from "../lib/live";
-import { IMAGE_PROJECTION, SEO_PROJECTION } from "./fragments";
+import {
+  CTA_BLOCK_PROJECTION,
+  FAQ_BLOCK_PROJECTION,
+  IMAGE_PROJECTION,
+  SEO_PROJECTION,
+  TESTIMONIAL_BLOCK_PROJECTION,
+} from "./fragments";
 import { SERVICE_CARD_PROJECTION } from "./services";
 
 const HOME_PAGE_QUERY = defineQuery(`
@@ -26,18 +32,11 @@ const HOME_PAGE_QUERY = defineQuery(`
     servicesHeading,
     servicesIntro,
     featuredServices[]->{ ${SERVICE_CARD_PROJECTION} },
-    stats[]{ value, label },
-    clientLogos[]{ ${IMAGE_PROJECTION} },
-    featuredTestimonial->{
-      _id,
-      quote,
-      name,
-      role,
-      company,
-      photo{ ${IMAGE_PROJECTION} }
-    },
-    faq{ eyebrow, heading, intro, items[]{ question, answer } },
-    ctaBand{ heading, text, cta{ label, href } },
+    "stats": statsBlock->items[]{ value, label },
+    "clientLogos": logoBlock->logos[]{ ${IMAGE_PROJECTION} },
+    "testimonials": testimonialBlock->{ ${TESTIMONIAL_BLOCK_PROJECTION} },
+    "faq": faqBlock->{ ${FAQ_BLOCK_PROJECTION} },
+    "ctaBand": ctaBlock->{ ${CTA_BLOCK_PROJECTION} },
     seo{ ${SEO_PROJECTION} }
   }
 `);

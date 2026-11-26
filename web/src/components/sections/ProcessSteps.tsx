@@ -13,9 +13,11 @@ export interface ProcessStepsData {
 export function ProcessSteps({
   steps,
   heading = "How we work",
+  eyebrow = "Our process",
 }: {
   steps: ProcessStepsData["steps"] | undefined;
   heading?: string;
+  eyebrow?: string | null;
 }) {
   const items = (steps ?? []).filter((s) => s.title && s.description);
   if (items.length === 0) return null;
@@ -26,7 +28,7 @@ export function ProcessSteps({
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
           <Reveal>
             <SectionHeading
-              eyebrow="Our process"
+              eyebrow={eyebrow}
               heading={heading}
               className="lg:sticky lg:top-28"
             />

@@ -27,3 +27,35 @@ export const PORTABLE_TEXT_PROJECTION = /* groq */ `
   ...,
   _type == "imageWithAlt" => { ${IMAGE_PROJECTION} }
 `;
+
+/*
+ * Reusable blocks. Each page references a block document; these projections
+ * resolve the reference and keep the shape the section components expect.
+ * Use with an alias, e.g. `"faq": faqBlock->{ ${FAQ_BLOCK_PROJECTION} }`.
+ */
+
+export const FAQ_BLOCK_PROJECTION = /* groq */ `
+  eyebrow,
+  heading,
+  intro,
+  items[]{ question, answer }
+`;
+
+export const CTA_BLOCK_PROJECTION = /* groq */ `
+  heading,
+  text,
+  cta{ label, href }
+`;
+
+export const TESTIMONIAL_BLOCK_PROJECTION = /* groq */ `
+  eyebrow,
+  heading,
+  "items": testimonials[]->{
+    _id,
+    quote,
+    name,
+    role,
+    company,
+    photo{ ${IMAGE_PROJECTION} }
+  }
+`;

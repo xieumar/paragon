@@ -5,6 +5,7 @@ import {
   PageHero,
   StorySection,
   TeamGrid,
+  Testimonial,
   ValuesGrid,
 } from "@/components/sections";
 import { Heading } from "@/components/ui";
@@ -62,6 +63,7 @@ export default async function AboutPage() {
       <StorySection data={about.story} />
       <ValuesGrid data={about.values} />
       <TeamGrid data={about.team} members={team} />
+      <Testimonial data={about.testimonials} />
       <CtaBand data={about.ctaBand} />
     </>
   );
