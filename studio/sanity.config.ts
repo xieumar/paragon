@@ -2,7 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
-import {SINGLETON_TYPES, structure} from './structure'
+import {SINGLETON_TYPES, WEBSITE_CREATED_TYPES, structure} from './structure'
 
 export default defineConfig({
   name: 'default',
@@ -15,10 +15,12 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
-    // Singletons can't be created from the "+" menu.
+    // Singletons and website-created documents can't be created from the "+" menu.
     templates: (templates) =>
       templates.filter(
-        ({schemaType}) => !(SINGLETON_TYPES as readonly string[]).includes(schemaType),
+        ({schemaType}) =>
+          !(SINGLETON_TYPES as readonly string[]).includes(schemaType) &&
+          !(WEBSITE_CREATED_TYPES as readonly string[]).includes(schemaType),
       ),
   },
 

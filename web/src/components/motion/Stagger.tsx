@@ -7,6 +7,7 @@ interface StaggerProps extends WithChildren {
   className?: string;
   /** Seconds between each child's entrance. */
   interval?: number;
+  style?: React.CSSProperties;
 }
 
 const container = (interval: number) => ({
@@ -24,10 +25,12 @@ export function Stagger({
   children,
   className,
   interval = 0.08,
+  style,
 }: StaggerProps) {
   return (
     <m.div
       className={cn(className)}
+      style={style}
       variants={container(interval)}
       initial="hidden"
       whileInView="show"

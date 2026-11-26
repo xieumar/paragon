@@ -10,7 +10,8 @@
     "deploy-graphql": "sanity graphql deploy",
     "dev": "sanity dev",
     "typegen": "sanity schemas extract --force && sanity typegen generate",
-    "start": "sanity start"
+    "start": "sanity start",
+    "singletons:fix": "sanity exec scripts/fix-singletons.ts --with-user-token"
   },
   "keywords": [
     "sanity"
@@ -31,6 +32,7 @@
   },
   "prettier": {
     "bracketSpacing": false,
+    "endOfLine": "auto",
     "printWidth": 100,
     "semi": false,
     "singleQuote": true

@@ -75,6 +75,366 @@ export type ImageWithAlt = {
   alt?: string;
 };
 
+export type Enquiry = {
+  _id: string;
+  _type: "enquiry";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  status?: "new" | "read" | "replied";
+  name?: string;
+  email?: string;
+  company?: string;
+  phone?: string;
+  service?: string;
+  message?: string;
+  consent?: boolean;
+  submittedAt?: string;
+  sourceUrl?: string;
+};
+
+export type Testimonial = {
+  _id: string;
+  _type: "testimonial";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  quote?: string;
+  name?: string;
+  role?: string;
+  company?: string;
+  photo?: ImageWithAlt;
+};
+
+export type TeamMember = {
+  _id: string;
+  _type: "teamMember";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  role?: string;
+  photo?: ImageWithAlt;
+  bio?: string;
+  linkedin?: string;
+  order?: number;
+};
+
+export type Service = {
+  _id: string;
+  _type: "service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  summary?: string;
+  image?: ImageWithAlt;
+  overview?: PortableText;
+  capabilities?: Array<string>;
+  processSteps?: Array<{
+    title?: string;
+    description?: string;
+    _type: "processStep";
+    _key: string;
+  }>;
+  order?: number;
+  seo?: Seo;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type TestimonialBlockReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "testimonialBlock";
+};
+
+export type LogoBlockReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "logoBlock";
+};
+
+export type FaqBlockReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "faqBlock";
+};
+
+export type CtaBlockReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "ctaBlock";
+};
+
+export type ServicesPage = {
+  _id: string;
+  _type: "servicesPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  header?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+    image?: ImageWithAlt;
+  };
+  testimonialBlock?: TestimonialBlockReference;
+  logoBlock?: LogoBlockReference;
+  faqBlock?: FaqBlockReference;
+  ctaBlock?: CtaBlockReference;
+  seo?: Seo;
+};
+
+export type StatsBlockReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "statsBlock";
+};
+
+export type ContactPage = {
+  _id: string;
+  _type: "contactPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  header?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+    image?: ImageWithAlt;
+  };
+  form?: {
+    heading?: string;
+    submitLabel?: string;
+    consentLabel?: string;
+    successTitle?: string;
+    successMessage?: string;
+  };
+  nextSteps?: {
+    eyebrow?: string;
+    heading?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      _type: "step";
+      _key: string;
+    }>;
+  };
+  testimonialBlock?: TestimonialBlockReference;
+  logoBlock?: LogoBlockReference;
+  statsBlock?: StatsBlockReference;
+  faqBlock?: FaqBlockReference;
+  seo?: Seo;
+};
+
+export type TeamMemberReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "teamMember";
+};
+
+export type AboutPage = {
+  _id: string;
+  _type: "aboutPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  header?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+    image?: ImageWithAlt;
+  };
+  story?: {
+    eyebrow?: string;
+    heading?: string;
+    body?: PortableText;
+  };
+  values?: {
+    eyebrow?: string;
+    heading?: string;
+    items?: Array<{
+      icon?:
+        | "ThumbsUp"
+        | "MousePointerClick"
+        | "Award"
+        | "MessageCircleQuestion"
+        | "Rocket"
+        | "ShieldCheck"
+        | "Lightbulb"
+        | "Users"
+        | "Target"
+        | "Heart"
+        | "Handshake"
+        | "Sparkles"
+        | "Gem"
+        | "Zap"
+        | "Globe"
+        | "Clock"
+        | "Palette";
+      title?: string;
+      description?: string;
+      _type: "value";
+      _key: string;
+    }>;
+  };
+  team?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+    members?: Array<
+      {
+        _key: string;
+      } & TeamMemberReference
+    >;
+  };
+  testimonialBlock?: TestimonialBlockReference;
+  ctaBlock?: CtaBlockReference;
+  seo?: Seo;
+};
+
+export type ServiceReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "service";
+};
+
+export type HomePage = {
+  _id: string;
+  _type: "homePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heroSlides?: Array<{
+    layout?: "overlay" | "split";
+    eyebrow?: string;
+    headline?: string;
+    subcopy?: string;
+    cta?: Cta;
+    image?: ImageWithAlt;
+    badge?: string;
+    _type: "heroSlide";
+    _key: string;
+  }>;
+  about?: {
+    eyebrow?: string;
+    heading?: string;
+    body?: string;
+    highlights?: Array<string>;
+    image?: ImageWithAlt;
+    cta?: Cta;
+  };
+  servicesEyebrow?: string;
+  servicesHeading?: string;
+  servicesIntro?: string;
+  featuredServices?: Array<
+    {
+      _key: string;
+    } & ServiceReference
+  >;
+  faqBlock?: FaqBlockReference;
+  logoBlock?: LogoBlockReference;
+  statsBlock?: StatsBlockReference;
+  testimonialBlock?: TestimonialBlockReference;
+  ctaBlock?: CtaBlockReference;
+  seo?: Seo;
+};
+
+export type CtaBlock = {
+  _id: string;
+  _type: "ctaBlock";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  heading?: string;
+  text?: string;
+  cta?: Cta;
+};
+
+export type TestimonialReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "testimonial";
+};
+
+export type TestimonialBlock = {
+  _id: string;
+  _type: "testimonialBlock";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  eyebrow?: string;
+  heading?: string;
+  testimonials?: Array<
+    {
+      _key: string;
+    } & TestimonialReference
+  >;
+};
+
+export type StatsBlock = {
+  _id: string;
+  _type: "statsBlock";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  items?: Array<{
+    value?: string;
+    label?: string;
+    _type: "stat";
+    _key: string;
+  }>;
+};
+
+export type LogoBlock = {
+  _id: string;
+  _type: "logoBlock";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  logos?: Array<
+    {
+      _key: string;
+    } & ImageWithAlt
+  >;
+};
+
+export type FaqBlock = {
+  _id: string;
+  _type: "faqBlock";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  eyebrow?: string;
+  heading?: string;
+  intro?: string;
+  items?: Array<{
+    question?: string;
+    answer?: string;
+    _type: "faqItem";
+    _key: string;
+  }>;
+};
+
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
@@ -271,12 +631,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type AllSanitySchemaTypes =
   | PortableText
   | Seo
@@ -284,6 +638,28 @@ export type AllSanitySchemaTypes =
   | Link
   | SanityImageAssetReference
   | ImageWithAlt
+  | Enquiry
+  | Testimonial
+  | TeamMember
+  | Service
+  | Slug
+  | TestimonialBlockReference
+  | LogoBlockReference
+  | FaqBlockReference
+  | CtaBlockReference
+  | ServicesPage
+  | StatsBlockReference
+  | ContactPage
+  | TeamMemberReference
+  | AboutPage
+  | ServiceReference
+  | HomePage
+  | CtaBlock
+  | TestimonialReference
+  | TestimonialBlock
+  | StatsBlock
+  | LogoBlock
+  | FaqBlock
   | SiteSettings
   | SanityImageCrop
   | SanityImageHotspot
@@ -296,29 +672,116 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint
-  | Slug;
+  | Geopoint;
 
-// Source: ../web/src/sanity/queries/siteSettings.ts
-// Variable: SITE_SETTINGS_QUERY
-// Query: *[_id == "siteSettings"][0]{    siteName,    tagline,    logo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    headerCta{ label, href },    navigation[]{ label, href },    footerColumns[]{ title, text, links[]{ label, href } },    legalLinks[]{ label, href },    contact{ email, phone, address },    socials[]{ platform, url },    defaultSeo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
-export type SITE_SETTINGS_QUERY_RESULT =
-  | {
-      siteName: null;
-      tagline: null;
-      logo: null;
-      headerCta: null;
-      navigation: null;
-      footerColumns: null;
-      legalLinks: null;
-      contact: null;
-      socials: null;
-      defaultSeo: null;
-    }
-  | {
-      siteName: string | null;
-      tagline: string | null;
-      logo: {
+// Source: ../web/src/sanity/queries/about.ts
+// Variable: ABOUT_PAGE_QUERY
+// Query: *[_type == "aboutPage"] | order(_updatedAt desc)[0]{    header{      eyebrow,      heading,      intro,      image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }    },    story{      eyebrow,      heading,      body[]{   ...,  _type == "imageWithAlt" => {   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }    },    values{      eyebrow,      heading,      items[]{ icon, title, description }    },    team{      eyebrow,      heading,      intro,      members[]->{        _id,        name,        role,        bio,        linkedin,        photo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }      }    },    "testimonials": testimonialBlock->{   eyebrow,  heading,  "items": testimonials[]->{    _id,    quote,    name,    role,    company,    photo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }  } },    "ctaBand": ctaBlock->{   heading,  text,  cta{ label, href } },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type ABOUT_PAGE_QUERY_RESULT = {
+  header: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+  story: {
+    eyebrow: string | null;
+    heading: string | null;
+    body: Array<
+      | {
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "blockquote" | "h2" | "h3" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }
+      | {
+          _key: string;
+          _type: "imageWithAlt";
+          asset: SanityImageAssetReference | null;
+          media?: unknown;
+          hotspot: {
+            x: number | null;
+            y: number | null;
+          } | null;
+          crop: {
+            top: number | null;
+            bottom: number | null;
+            left: number | null;
+            right: number | null;
+          } | null;
+          alt: string | "";
+          width: number | null;
+          height: number | null;
+          lqip: string | null;
+        }
+    > | null;
+  } | null;
+  values: {
+    eyebrow: string | null;
+    heading: string | null;
+    items: Array<{
+      icon:
+        | "Award"
+        | "Clock"
+        | "Gem"
+        | "Globe"
+        | "Handshake"
+        | "Heart"
+        | "Lightbulb"
+        | "MessageCircleQuestion"
+        | "MousePointerClick"
+        | "Palette"
+        | "Rocket"
+        | "ShieldCheck"
+        | "Sparkles"
+        | "Target"
+        | "ThumbsUp"
+        | "Users"
+        | "Zap"
+        | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  team: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+    members: Array<{
+      _id: string;
+      name: string | null;
+      role: string | null;
+      bio: string | null;
+      linkedin: string | null;
+      photo: {
         asset: SanityImageAssetReference | null;
         alt: string | "";
         width: number | null;
@@ -335,65 +798,722 @@ export type SITE_SETTINGS_QUERY_RESULT =
           right: number | null;
         } | null;
       } | null;
-      headerCta: {
-        label: string | null;
-        href: string | null;
-      } | null;
-      navigation: Array<{
-        label: string | null;
-        href: string | null;
-      }> | null;
-      footerColumns: Array<{
-        title: string | null;
-        text: string | null;
-        links: Array<{
-          label: string | null;
-          href: string | null;
-        }> | null;
-      }> | null;
-      legalLinks: Array<{
-        label: string | null;
-        href: string | null;
-      }> | null;
-      contact: {
-        email: string | null;
-        phone: string | null;
-        address: string | null;
-      } | null;
-      socials: Array<{
-        platform:
-          "Facebook" | "Instagram" | "LinkedIn" | "X" | "YouTube" | null;
-        url: string | null;
-      }> | null;
-      defaultSeo: {
-        title: string | null;
-        description: string | null;
-        noindex: boolean | null;
-        image: {
-          asset: SanityImageAssetReference | null;
-          alt: string | "";
-          width: number | null;
-          height: number | null;
-          lqip: string | null;
-          hotspot: {
-            x: number | null;
-            y: number | null;
-          } | null;
-          crop: {
-            top: number | null;
-            bottom: number | null;
-            left: number | null;
-            right: number | null;
-          } | null;
+    }> | null;
+  } | null;
+  testimonials: {
+    eyebrow: string | null;
+    heading: string | null;
+    items: Array<{
+      _id: string;
+      quote: string | null;
+      name: string | null;
+      role: string | null;
+      company: string | null;
+      photo: {
+        asset: SanityImageAssetReference | null;
+        alt: string | "";
+        width: number | null;
+        height: number | null;
+        lqip: string | null;
+        hotspot: {
+          x: number | null;
+          y: number | null;
+        } | null;
+        crop: {
+          top: number | null;
+          bottom: number | null;
+          left: number | null;
+          right: number | null;
         } | null;
       } | null;
-    }
-  | null;
+    }> | null;
+  } | null;
+  ctaBand: {
+    heading: string | null;
+    text: string | null;
+    cta: {
+      label: string | null;
+      href: string | null;
+    } | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    noindex: boolean | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../web/src/sanity/queries/about.ts
+// Variable: TEAM_MEMBERS_QUERY
+// Query: *[_type == "teamMember"] | order(coalesce(order, 100) asc, name asc){    _id,    name,    role,    bio,    linkedin,    photo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }  }
+export type TEAM_MEMBERS_QUERY_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  role: string | null;
+  bio: string | null;
+  linkedin: string | null;
+  photo: {
+    asset: SanityImageAssetReference | null;
+    alt: string | "";
+    width: number | null;
+    height: number | null;
+    lqip: string | null;
+    hotspot: {
+      x: number | null;
+      y: number | null;
+    } | null;
+    crop: {
+      top: number | null;
+      bottom: number | null;
+      left: number | null;
+      right: number | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../web/src/sanity/queries/contact.ts
+// Variable: CONTACT_PAGE_QUERY
+// Query: *[_type == "contactPage"] | order(_updatedAt desc)[0]{    header{      eyebrow,      heading,      intro,      image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }    },    form{ heading, submitLabel, consentLabel, successTitle, successMessage },    nextSteps{ eyebrow, heading, items[]{ title, description } },    "stats": statsBlock->items[]{ value, label },    "clientLogos": logoBlock->logos[]{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    "testimonials": testimonialBlock->{   eyebrow,  heading,  "items": testimonials[]->{    _id,    quote,    name,    role,    company,    photo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }  } },    "faq": faqBlock->{   eyebrow,  heading,  intro,  items[]{ question, answer } },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type CONTACT_PAGE_QUERY_RESULT = {
+  header: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+  form: {
+    heading: string | null;
+    submitLabel: string | null;
+    consentLabel: string | null;
+    successTitle: string | null;
+    successMessage: string | null;
+  } | null;
+  nextSteps: {
+    eyebrow: string | null;
+    heading: string | null;
+    items: Array<{
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  stats: Array<{
+    value: string | null;
+    label: string | null;
+  }> | null;
+  clientLogos: Array<{
+    asset: SanityImageAssetReference | null;
+    alt: string | "";
+    width: number | null;
+    height: number | null;
+    lqip: string | null;
+    hotspot: {
+      x: number | null;
+      y: number | null;
+    } | null;
+    crop: {
+      top: number | null;
+      bottom: number | null;
+      left: number | null;
+      right: number | null;
+    } | null;
+  }> | null;
+  testimonials: {
+    eyebrow: string | null;
+    heading: string | null;
+    items: Array<{
+      _id: string;
+      quote: string | null;
+      name: string | null;
+      role: string | null;
+      company: string | null;
+      photo: {
+        asset: SanityImageAssetReference | null;
+        alt: string | "";
+        width: number | null;
+        height: number | null;
+        lqip: string | null;
+        hotspot: {
+          x: number | null;
+          y: number | null;
+        } | null;
+        crop: {
+          top: number | null;
+          bottom: number | null;
+          left: number | null;
+          right: number | null;
+        } | null;
+      } | null;
+    }> | null;
+  } | null;
+  faq: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+    items: Array<{
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    noindex: boolean | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../web/src/sanity/queries/home.ts
+// Variable: HOME_PAGE_QUERY
+// Query: *[_type == "homePage"] | order(_updatedAt desc)[0]{    heroSlides[]{      layout,      eyebrow,      headline,      subcopy,      cta{ label, href },      image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },      badge    },    about{      eyebrow,      heading,      body,      highlights,      image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },      cta{ label, href }    },    servicesEyebrow,    servicesHeading,    servicesIntro,    featuredServices[]->{   _id,  title,  "slug": slug.current,  summary,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } },    "stats": statsBlock->items[]{ value, label },    "clientLogos": logoBlock->logos[]{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    "testimonials": testimonialBlock->{   eyebrow,  heading,  "items": testimonials[]->{    _id,    quote,    name,    role,    company,    photo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }  } },    "faq": faqBlock->{   eyebrow,  heading,  intro,  items[]{ question, answer } },    "ctaBand": ctaBlock->{   heading,  text,  cta{ label, href } },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type HOME_PAGE_QUERY_RESULT = {
+  heroSlides: Array<{
+    layout: "overlay" | "split" | null;
+    eyebrow: string | null;
+    headline: string | null;
+    subcopy: string | null;
+    cta: {
+      label: string | null;
+      href: string | null;
+    } | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+    badge: string | null;
+  }> | null;
+  about: {
+    eyebrow: string | null;
+    heading: string | null;
+    body: string | null;
+    highlights: Array<string> | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+    cta: {
+      label: string | null;
+      href: string | null;
+    } | null;
+  } | null;
+  servicesEyebrow: string | null;
+  servicesHeading: string | null;
+  servicesIntro: string | null;
+  featuredServices: Array<{
+    _id: string;
+    title: string | null;
+    slug: string | null;
+    summary: string | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  }> | null;
+  stats: Array<{
+    value: string | null;
+    label: string | null;
+  }> | null;
+  clientLogos: Array<{
+    asset: SanityImageAssetReference | null;
+    alt: string | "";
+    width: number | null;
+    height: number | null;
+    lqip: string | null;
+    hotspot: {
+      x: number | null;
+      y: number | null;
+    } | null;
+    crop: {
+      top: number | null;
+      bottom: number | null;
+      left: number | null;
+      right: number | null;
+    } | null;
+  }> | null;
+  testimonials: {
+    eyebrow: string | null;
+    heading: string | null;
+    items: Array<{
+      _id: string;
+      quote: string | null;
+      name: string | null;
+      role: string | null;
+      company: string | null;
+      photo: {
+        asset: SanityImageAssetReference | null;
+        alt: string | "";
+        width: number | null;
+        height: number | null;
+        lqip: string | null;
+        hotspot: {
+          x: number | null;
+          y: number | null;
+        } | null;
+        crop: {
+          top: number | null;
+          bottom: number | null;
+          left: number | null;
+          right: number | null;
+        } | null;
+      } | null;
+    }> | null;
+  } | null;
+  faq: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+    items: Array<{
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  ctaBand: {
+    heading: string | null;
+    text: string | null;
+    cta: {
+      label: string | null;
+      href: string | null;
+    } | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    noindex: boolean | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../web/src/sanity/queries/services.ts
+// Variable: SERVICES_QUERY
+// Query: *[_type == "service" && defined(slug.current)]    | order(coalesce(order, 100) asc, title asc){      _id,  title,  "slug": slug.current,  summary,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }  }
+export type SERVICES_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  slug: string;
+  summary: string | null;
+  image: {
+    asset: SanityImageAssetReference | null;
+    alt: string | "";
+    width: number | null;
+    height: number | null;
+    lqip: string | null;
+    hotspot: {
+      x: number | null;
+      y: number | null;
+    } | null;
+    crop: {
+      top: number | null;
+      bottom: number | null;
+      left: number | null;
+      right: number | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../web/src/sanity/queries/services.ts
+// Variable: SERVICE_QUERY
+// Query: *[_type == "service" && slug.current == $slug][0]{      _id,  title,  "slug": slug.current,  summary,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    overview[]{   ...,  _type == "imageWithAlt" => {   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } },    capabilities,    processSteps[]{ title, description },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type SERVICE_QUERY_RESULT = {
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  summary: string | null;
+  image: {
+    asset: SanityImageAssetReference | null;
+    alt: string | "";
+    width: number | null;
+    height: number | null;
+    lqip: string | null;
+    hotspot: {
+      x: number | null;
+      y: number | null;
+    } | null;
+    crop: {
+      top: number | null;
+      bottom: number | null;
+      left: number | null;
+      right: number | null;
+    } | null;
+  } | null;
+  overview: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        _key: string;
+        _type: "imageWithAlt";
+        asset: SanityImageAssetReference | null;
+        media?: unknown;
+        hotspot: {
+          x: number | null;
+          y: number | null;
+        } | null;
+        crop: {
+          top: number | null;
+          bottom: number | null;
+          left: number | null;
+          right: number | null;
+        } | null;
+        alt: string | "";
+        width: number | null;
+        height: number | null;
+        lqip: string | null;
+      }
+  > | null;
+  capabilities: Array<string> | null;
+  processSteps: Array<{
+    title: string | null;
+    description: string | null;
+  }> | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    noindex: boolean | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../web/src/sanity/queries/services.ts
+// Variable: SERVICE_SLUGS_QUERY
+// Query: *[_type == "service" && defined(slug.current)]{ "slug": slug.current }
+export type SERVICE_SLUGS_QUERY_RESULT = Array<{
+  slug: string;
+}>;
+
+// Source: ../web/src/sanity/queries/servicesPage.ts
+// Variable: SERVICES_PAGE_QUERY
+// Query: *[_type == "servicesPage"] | order(_updatedAt desc)[0]{    header{      eyebrow,      heading,      intro,      image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }    },    "clientLogos": logoBlock->logos[]{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    "testimonials": testimonialBlock->{   eyebrow,  heading,  "items": testimonials[]->{    _id,    quote,    name,    role,    company,    photo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }  } },    "faq": faqBlock->{   eyebrow,  heading,  intro,  items[]{ question, answer } },    "ctaBand": ctaBlock->{   heading,  text,  cta{ label, href } },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type SERVICES_PAGE_QUERY_RESULT = {
+  header: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+  clientLogos: Array<{
+    asset: SanityImageAssetReference | null;
+    alt: string | "";
+    width: number | null;
+    height: number | null;
+    lqip: string | null;
+    hotspot: {
+      x: number | null;
+      y: number | null;
+    } | null;
+    crop: {
+      top: number | null;
+      bottom: number | null;
+      left: number | null;
+      right: number | null;
+    } | null;
+  }> | null;
+  testimonials: {
+    eyebrow: string | null;
+    heading: string | null;
+    items: Array<{
+      _id: string;
+      quote: string | null;
+      name: string | null;
+      role: string | null;
+      company: string | null;
+      photo: {
+        asset: SanityImageAssetReference | null;
+        alt: string | "";
+        width: number | null;
+        height: number | null;
+        lqip: string | null;
+        hotspot: {
+          x: number | null;
+          y: number | null;
+        } | null;
+        crop: {
+          top: number | null;
+          bottom: number | null;
+          left: number | null;
+          right: number | null;
+        } | null;
+      } | null;
+    }> | null;
+  } | null;
+  faq: {
+    eyebrow: string | null;
+    heading: string | null;
+    intro: string | null;
+    items: Array<{
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  ctaBand: {
+    heading: string | null;
+    text: string | null;
+    cta: {
+      label: string | null;
+      href: string | null;
+    } | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    noindex: boolean | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../web/src/sanity/queries/siteSettings.ts
+// Variable: SITE_SETTINGS_QUERY
+// Query: *[_type == "siteSettings"] | order(_updatedAt desc)[0]{    siteName,    tagline,    logo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} },    headerCta{ label, href },    navigation[]{ label, href },    footerColumns[]{ title, text, links[]{ label, href } },    legalLinks[]{ label, href },    contact{ email, phone, address },    socials[]{ platform, url },    defaultSeo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+export type SITE_SETTINGS_QUERY_RESULT = {
+  siteName: string | null;
+  tagline: string | null;
+  logo: {
+    asset: SanityImageAssetReference | null;
+    alt: string | "";
+    width: number | null;
+    height: number | null;
+    lqip: string | null;
+    hotspot: {
+      x: number | null;
+      y: number | null;
+    } | null;
+    crop: {
+      top: number | null;
+      bottom: number | null;
+      left: number | null;
+      right: number | null;
+    } | null;
+  } | null;
+  headerCta: {
+    label: string | null;
+    href: string | null;
+  } | null;
+  navigation: Array<{
+    label: string | null;
+    href: string | null;
+  }> | null;
+  footerColumns: Array<{
+    title: string | null;
+    text: string | null;
+    links: Array<{
+      label: string | null;
+      href: string | null;
+    }> | null;
+  }> | null;
+  legalLinks: Array<{
+    label: string | null;
+    href: string | null;
+  }> | null;
+  contact: {
+    email: string | null;
+    phone: string | null;
+    address: string | null;
+  } | null;
+  socials: Array<{
+    platform: "Facebook" | "Instagram" | "LinkedIn" | "X" | "YouTube" | null;
+    url: string | null;
+  }> | null;
+  defaultSeo: {
+    title: string | null;
+    description: string | null;
+    noindex: boolean | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | "";
+      width: number | null;
+      height: number | null;
+      lqip: string | null;
+      hotspot: {
+        x: number | null;
+        y: number | null;
+      } | null;
+      crop: {
+        top: number | null;
+        bottom: number | null;
+        left: number | null;
+        right: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
 
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n  *[_id == "siteSettings"][0]{\n    siteName,\n    tagline,\n    logo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    headerCta{ label, href },\n    navigation[]{ label, href },\n    footerColumns[]{ title, text, links[]{ label, href } },\n    legalLinks[]{ label, href },\n    contact{ email, phone, address },\n    socials[]{ platform, url },\n    defaultSeo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "aboutPage"] | order(_updatedAt desc)[0]{\n    header{\n      eyebrow,\n      heading,\n      intro,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    story{\n      eyebrow,\n      heading,\n      body[]{ \n  ...,\n  _type == "imageWithAlt" => { \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n    },\n    values{\n      eyebrow,\n      heading,\n      items[]{ icon, title, description }\n    },\n    team{\n      eyebrow,\n      heading,\n      intro,\n      members[]->{\n        _id,\n        name,\n        role,\n        bio,\n        linkedin,\n        photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n      }\n    },\n    "testimonials": testimonialBlock->{ \n  eyebrow,\n  heading,\n  "items": testimonials[]->{\n    _id,\n    quote,\n    name,\n    role,\n    company,\n    photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n  }\n },\n    "ctaBand": ctaBlock->{ \n  heading,\n  text,\n  cta{ label, href }\n },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
+    '\n  *[_type == "teamMember"] | order(coalesce(order, 100) asc, name asc){\n    _id,\n    name,\n    role,\n    bio,\n    linkedin,\n    photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n  }\n': TEAM_MEMBERS_QUERY_RESULT;
+    '\n  *[_type == "contactPage"] | order(_updatedAt desc)[0]{\n    header{\n      eyebrow,\n      heading,\n      intro,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    form{ heading, submitLabel, consentLabel, successTitle, successMessage },\n    nextSteps{ eyebrow, heading, items[]{ title, description } },\n    "stats": statsBlock->items[]{ value, label },\n    "clientLogos": logoBlock->logos[]{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    "testimonials": testimonialBlock->{ \n  eyebrow,\n  heading,\n  "items": testimonials[]->{\n    _id,\n    quote,\n    name,\n    role,\n    company,\n    photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n  }\n },\n    "faq": faqBlock->{ \n  eyebrow,\n  heading,\n  intro,\n  items[]{ question, answer }\n },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': CONTACT_PAGE_QUERY_RESULT;
+    '\n  *[_type == "homePage"] | order(_updatedAt desc)[0]{\n    heroSlides[]{\n      layout,\n      eyebrow,\n      headline,\n      subcopy,\n      cta{ label, href },\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n      badge\n    },\n    about{\n      eyebrow,\n      heading,\n      body,\n      highlights,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n      cta{ label, href }\n    },\n    servicesEyebrow,\n    servicesHeading,\n    servicesIntro,\n    featuredServices[]->{ \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n },\n    "stats": statsBlock->items[]{ value, label },\n    "clientLogos": logoBlock->logos[]{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    "testimonials": testimonialBlock->{ \n  eyebrow,\n  heading,\n  "items": testimonials[]->{\n    _id,\n    quote,\n    name,\n    role,\n    company,\n    photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n  }\n },\n    "faq": faqBlock->{ \n  eyebrow,\n  heading,\n  intro,\n  items[]{ question, answer }\n },\n    "ctaBand": ctaBlock->{ \n  heading,\n  text,\n  cta{ label, href }\n },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': HOME_PAGE_QUERY_RESULT;
+    '\n  *[_type == "service" && defined(slug.current)]\n    | order(coalesce(order, 100) asc, title asc){\n    \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n\n  }\n': SERVICES_QUERY_RESULT;
+    '\n  *[_type == "service" && slug.current == $slug][0]{\n    \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n,\n    overview[]{ \n  ...,\n  _type == "imageWithAlt" => { \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n },\n    capabilities,\n    processSteps[]{ title, description },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SERVICE_QUERY_RESULT;
+    '\n  *[_type == "service" && defined(slug.current)]{ "slug": slug.current }\n': SERVICE_SLUGS_QUERY_RESULT;
+    '\n  *[_type == "servicesPage"] | order(_updatedAt desc)[0]{\n    header{\n      eyebrow,\n      heading,\n      intro,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    "clientLogos": logoBlock->logos[]{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    "testimonials": testimonialBlock->{ \n  eyebrow,\n  heading,\n  "items": testimonials[]->{\n    _id,\n    quote,\n    name,\n    role,\n    company,\n    photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n  }\n },\n    "faq": faqBlock->{ \n  eyebrow,\n  heading,\n  intro,\n  items[]{ question, answer }\n },\n    "ctaBand": ctaBlock->{ \n  heading,\n  text,\n  cta{ label, href }\n },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SERVICES_PAGE_QUERY_RESULT;
+    '\n  *[_type == "siteSettings"] | order(_updatedAt desc)[0]{\n    siteName,\n    tagline,\n    logo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    headerCta{ label, href },\n    navigation[]{ label, href },\n    footerColumns[]{ title, text, links[]{ label, href } },\n    legalLinks[]{ label, href },\n    contact{ email, phone, address },\n    socials[]{ platform, url },\n    defaultSeo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
