@@ -1,7 +1,7 @@
 "use client";
 
 import * as m from "motion/react-m";
-import { headingVariants } from "@/components/ui";
+import { headingVariants } from "@/components/ui/Heading";
 import { cn } from "@/lib";
 
 const EASE = [0.22, 1, 0.36, 1] as const;

@@ -1,9 +1,11 @@
 import { defineQuery } from "next-sanity";
 import { cachedSanity } from "../lib/live";
 import {
+  CTA_BLOCK_PROJECTION,
   IMAGE_PROJECTION,
   PORTABLE_TEXT_PROJECTION,
   SEO_PROJECTION,
+  TESTIMONIAL_BLOCK_PROJECTION,
 } from "./fragments";
 
 const ABOUT_PAGE_QUERY = defineQuery(`
@@ -37,7 +39,8 @@ const ABOUT_PAGE_QUERY = defineQuery(`
         photo{ ${IMAGE_PROJECTION} }
       }
     },
-    ctaBand{ heading, text, cta{ label, href } },
+    "testimonials": testimonialBlock->{ ${TESTIMONIAL_BLOCK_PROJECTION} },
+    "ctaBand": ctaBlock->{ ${CTA_BLOCK_PROJECTION} },
     seo{ ${SEO_PROJECTION} }
   }
 `);

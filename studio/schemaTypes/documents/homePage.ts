@@ -153,128 +153,51 @@ export const homePage = defineType({
       title: 'Featured services',
       type: 'array',
       group: 'services',
-      description: 'Choose up to 6 services to show, in this order.',
-      validation: (rule) => rule.max(6),
+      description: 'Choose up to 6 services to show, in this order. Each service only once.',
+      validation: (rule) => rule.max(6).unique(),
       of: [defineArrayMember({type: 'reference', to: [{type: 'service'}]})],
     }),
 
     defineField({
-      name: 'stats',
-      type: 'array',
-      group: 'credibility',
-      description: 'Up to 4 headline numbers, e.g. "15+" and "Years of experience".',
-      validation: (rule) => rule.max(4),
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'stat',
-          fields: [
-            defineField({
-              name: 'value',
-              type: 'string',
-              validation: (rule) => rule.required().max(10),
-            }),
-            defineField({
-              name: 'label',
-              type: 'string',
-              validation: (rule) => rule.required().max(40),
-            }),
-          ],
-          preview: {select: {title: 'value', subtitle: 'label'}},
-        }),
-      ],
-    }),
-    defineField({
-      name: 'clientLogos',
-      title: 'Client logos',
-      type: 'array',
-      group: 'credibility',
-      description: 'Up to 8 logos. Use alt text with the client name.',
-      validation: (rule) => rule.max(8),
-      of: [defineArrayMember({type: 'imageWithAlt'})],
-    }),
-
-    defineField({
-      name: 'featuredTestimonial',
-      title: 'Featured testimonial',
+      name: 'faqBlock',
+      title: 'FAQ',
       type: 'reference',
-      group: 'testimonial',
-      to: [{type: 'testimonial'}],
-    }),
-
-    defineField({
-      name: 'faq',
-      title: 'FAQ section',
-      type: 'object',
+      to: [{type: 'faqBlock'}],
       group: 'faq',
-      description: 'Shown before the closing call to action. Leave the heading empty to hide it.',
-      fields: [
-        defineField({
-          name: 'eyebrow',
-          title: 'Small label',
-          type: 'string',
-          validation: (rule) => rule.max(40),
-        }),
-        defineField({
-          name: 'heading',
-          type: 'string',
-          validation: (rule) => rule.max(100),
-        }),
-        defineField({
-          name: 'intro',
-          title: 'Intro text',
-          type: 'text',
-          rows: 2,
-          validation: (rule) => rule.max(240),
-        }),
-        defineField({
-          name: 'items',
-          title: 'Questions',
-          type: 'array',
-          validation: (rule) => rule.max(10),
-          of: [
-            defineArrayMember({
-              type: 'object',
-              name: 'faqItem',
-              fields: [
-                defineField({
-                  name: 'question',
-                  type: 'string',
-                  validation: (rule) => rule.required().max(160),
-                }),
-                defineField({
-                  name: 'answer',
-                  type: 'text',
-                  rows: 4,
-                  validation: (rule) => rule.required().max(800),
-                }),
-              ],
-              preview: {select: {title: 'question', subtitle: 'answer'}},
-            }),
-          ],
-        }),
-      ],
+      description:
+        'Pick a FAQ set to show here. Create or edit sets under "Reusable blocks" in the sidebar. Leave empty to hide this section.',
     }),
-
     defineField({
-      name: 'ctaBand',
+      name: 'logoBlock',
+      title: 'Client logos',
+      type: 'reference',
+      to: [{type: 'logoBlock'}],
+      group: 'credibility',
+      description: 'Pick a logo banner to show here. Leave empty to hide it.',
+    }),
+    defineField({
+      name: 'statsBlock',
+      title: 'Stats',
+      type: 'reference',
+      to: [{type: 'statsBlock'}],
+      group: 'credibility',
+      description: 'Pick a set of headline numbers. Leave empty to hide it.',
+    }),
+    defineField({
+      name: 'testimonialBlock',
+      title: 'Testimonials',
+      type: 'reference',
+      to: [{type: 'testimonialBlock'}],
+      group: 'testimonial',
+      description: 'Pick a testimonial slider. Leave empty to hide it.',
+    }),
+    defineField({
+      name: 'ctaBlock',
       title: 'Closing call to action',
-      type: 'object',
+      type: 'reference',
+      to: [{type: 'ctaBlock'}],
       group: 'cta',
-      fields: [
-        defineField({
-          name: 'heading',
-          type: 'string',
-          validation: (rule) => rule.max(80),
-        }),
-        defineField({
-          name: 'text',
-          type: 'text',
-          rows: 2,
-          validation: (rule) => rule.max(200),
-        }),
-        defineField({name: 'cta', title: 'Button', type: 'cta'}),
-      ],
+      description: 'Pick the closing call to action. Leave empty to hide it.',
     }),
 
     defineField({name: 'seo', type: 'seo', group: 'seo'}),
