@@ -71,7 +71,7 @@ export function RichText({
   value,
   className,
 }: {
-  value: PortableTextValue;
+  value: React.ComponentProps<typeof PortableText>["value"];
   className?: string;
 }) {
   return (

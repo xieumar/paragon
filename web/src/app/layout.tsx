@@ -25,7 +25,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
 
   return (
     <html lang="en" className={`${jakarta.variable} h-full`}>
-      <body className="min-h-full flex flex-col">
+      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla) inject
+          attributes onto <body> before React loads. Applies to this element only. */}
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-cta focus:px-4 focus:py-2 focus:text-cta-foreground"
@@ -39,7 +41,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           </main>
           <SiteFooter settings={settings} />
         </MotionProvider>
-        <SanityLive />
+        <SanityLive includeDrafts={false} />
       </body>
     </html>
   );

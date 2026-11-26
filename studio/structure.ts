@@ -1,15 +1,21 @@
 import type {StructureResolver} from 'sanity/structure'
 
-/** Document types that exist exactly once and are edited from a fixed sidebar entry. */
-export const SINGLETON_TYPES = ['siteSettings'] as const
+/** Documents that exist exactly once, each with a fixed sidebar entry. */
+const SINGLETONS = [
+  {type: 'siteSettings', title: 'Site settings'},
+  {type: 'homePage', title: 'Home page'},
+  {type: 'aboutPage', title: 'About page'},
+] as const
+
+export const SINGLETON_TYPES = SINGLETONS.map((singleton) => singleton.type)
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
     .items([
-      S.listItem()
-        .title('Site settings')
-        .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+      ...SINGLETONS.map(({type, title}) =>
+        S.listItem().title(title).id(type).child(S.document().schemaType(type).documentId(type)),
+      ),
       S.divider(),
       // Everything else (collections) is listed automatically.
       ...S.documentTypeListItems().filter(

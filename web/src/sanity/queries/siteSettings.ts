@@ -3,7 +3,7 @@ import { cachedSanity } from "../lib/live";
 import { IMAGE_PROJECTION, SEO_PROJECTION } from "./fragments";
 
 const SITE_SETTINGS_QUERY = defineQuery(`
-  *[_id == "siteSettings"][0]{
+  *[_type == "siteSettings"] | order(_updatedAt desc)[0]{
     siteName,
     tagline,
     logo{ ${IMAGE_PROJECTION} },
@@ -28,7 +28,11 @@ export type SiteSettings = Awaited<ReturnType<typeof getSiteSettings>>;
  */
 export async function getSiteSettings() {
   try {
-    const { data } = await cachedSanity({ query: SITE_SETTINGS_QUERY });
+    const { data } = await cachedSanity({
+      query: SITE_SETTINGS_QUERY,
+      perspective: "published",
+      stega: false,
+    });
     return data;
   } catch (error) {
     console.error("Failed to load site settings from Sanity:", error);
