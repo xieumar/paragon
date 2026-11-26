@@ -1,10 +1,12 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {singletonReadOnly} from '../singleton'
 
 /** Singleton: site-wide settings (one document, edited from the Studio sidebar). */
 export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site settings',
   type: 'document',
+  readOnly: singletonReadOnly('siteSettings'),
   groups: [
     {name: 'general', title: 'General', default: true},
     {name: 'navigation', title: 'Navigation'},

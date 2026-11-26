@@ -1,6 +1,6 @@
 import { Container } from "@/components/layout";
-import { Reveal } from "@/components/motion";
-import { Heading, SanityImage } from "@/components/ui";
+import { Parallax, Reveal, TextReveal } from "@/components/motion";
+import { SanityImage } from "@/components/ui";
 import { toImage, type ImageInput } from "@/sanity/image";
 
 export interface PageHeroData {
@@ -10,7 +10,7 @@ export interface PageHeroData {
   image: ImageInput | null;
 }
 
-/** Header at the top of an inner page: label, big title, intro and optional photo. */
+/** Header at the top of an inner page: label, animated title, intro and photo. */
 export function PageHero({ data }: { data: PageHeroData | null | undefined }) {
   if (!data?.heading) return null;
   const image = toImage(data.image);
@@ -25,31 +25,35 @@ export function PageHero({ data }: { data: PageHeroData | null | undefined }) {
               : "max-w-4xl"
           }
         >
-          <Reveal>
+          <div>
             {data.eyebrow && (
-              <p className="mb-6 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.18em] text-cta">
-                <span aria-hidden className="h-px w-10 bg-cta" />
-                {data.eyebrow}
-              </p>
+              <Reveal y={12}>
+                <p className="mb-6 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.18em] text-cta">
+                  <span aria-hidden className="h-px w-10 bg-cta" />
+                  {data.eyebrow}
+                </p>
+              </Reveal>
             )}
-            <Heading as="h1" size="display">
-              {data.heading}
-            </Heading>
+            <TextReveal text={data.heading} as="h1" size="display" />
             {data.intro && (
-              <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-                {data.intro}
-              </p>
+              <Reveal delay={0.45}>
+                <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+                  {data.intro}
+                </p>
+              </Reveal>
             )}
-          </Reveal>
+          </div>
 
           {image && (
-            <Reveal delay={0.1}>
-              <SanityImage
-                image={image}
-                priority
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="aspect-[4/3] w-full rounded-3xl object-cover"
-              />
+            <Reveal delay={0.15}>
+              <Parallax className="aspect-[4/3] rounded-3xl">
+                <SanityImage
+                  image={image}
+                  priority
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="h-full w-full object-cover"
+                />
+              </Parallax>
             </Reveal>
           )}
         </div>

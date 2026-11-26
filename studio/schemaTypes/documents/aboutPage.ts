@@ -1,10 +1,12 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {singletonReadOnly} from '../singleton'
 
 /** Singleton: the About page. Team members are separate documents. */
 export const aboutPage = defineType({
   name: 'aboutPage',
   title: 'About page',
   type: 'document',
+  readOnly: singletonReadOnly('aboutPage'),
   groups: [
     {name: 'header', title: 'Header', default: true},
     {name: 'story', title: 'Our story'},
@@ -95,6 +97,33 @@ export const aboutPage = defineType({
               type: 'object',
               name: 'value',
               fields: [
+                defineField({
+                  name: 'icon',
+                  type: 'string',
+                  description: 'Pick an icon shown above the title.',
+                  options: {
+                    layout: 'dropdown',
+                    list: [
+                      {title: 'Thumbs up', value: 'ThumbsUp'},
+                      {title: 'Cursor', value: 'MousePointerClick'},
+                      {title: 'Award', value: 'Award'},
+                      {title: 'Question / support', value: 'MessageCircleQuestion'},
+                      {title: 'Rocket', value: 'Rocket'},
+                      {title: 'Shield', value: 'ShieldCheck'},
+                      {title: 'Lightbulb', value: 'Lightbulb'},
+                      {title: 'People', value: 'Users'},
+                      {title: 'Target', value: 'Target'},
+                      {title: 'Heart', value: 'Heart'},
+                      {title: 'Handshake', value: 'Handshake'},
+                      {title: 'Sparkles', value: 'Sparkles'},
+                      {title: 'Gem', value: 'Gem'},
+                      {title: 'Lightning', value: 'Zap'},
+                      {title: 'Globe', value: 'Globe'},
+                      {title: 'Clock', value: 'Clock'},
+                      {title: 'Palette', value: 'Palette'},
+                    ],
+                  },
+                }),
                 defineField({
                   name: 'title',
                   type: 'string',

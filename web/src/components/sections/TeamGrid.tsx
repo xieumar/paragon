@@ -32,7 +32,7 @@ function initials(name: string) {
     .join("");
 }
 
-/** Grid of team members with portrait, role, short bio and LinkedIn link. */
+/** Team: clean portraits with the name and role centred underneath. */
 export function TeamGrid({ data, members }: TeamGridProps) {
   const people = members.filter((m) => m.name && m.role);
   if (!data?.heading || people.length === 0) return null;
@@ -45,20 +45,21 @@ export function TeamGrid({ data, members }: TeamGridProps) {
             eyebrow={data.eyebrow}
             heading={data.heading}
             intro={data.intro}
+            className="mx-auto text-center"
           />
         </Reveal>
-        <Stagger className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-[repeat(auto-fit,minmax(15rem,1fr))]">
+        <Stagger className="mt-14 grid gap-x-8 gap-y-14 [grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))]">
           {people.map((person) => {
             const photo = toImage(person.photo);
             return (
               <StaggerItem key={person._id}>
-                <article className="group">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-secondary">
+                <article className="group text-center">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-secondary">
                     {photo ? (
                       <SanityImage
                         image={photo}
-                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                        className="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                        sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     ) : (
                       <div
@@ -69,12 +70,12 @@ export function TeamGrid({ data, members }: TeamGridProps) {
                       </div>
                     )}
                   </div>
-                  <h3 className="mt-5 text-lg font-bold tracking-tight">
+                  <h3 className="mt-6 text-xl font-bold tracking-tight">
                     {person.name}
                   </h3>
-                  <p className="text-sm font-medium text-cta">{person.role}</p>
+                  <p className="mt-1 text-muted-foreground">{person.role}</p>
                   {person.bio && (
-                    <p className="mt-3 text-sm text-muted-foreground">
+                    <p className="mx-auto mt-3 max-w-xs text-sm text-muted-foreground">
                       {person.bio}
                     </p>
                   )}
@@ -84,7 +85,7 @@ export function TeamGrid({ data, members }: TeamGridProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${person.name} on LinkedIn`}
-                      className="mt-3 inline-block text-sm font-semibold underline-offset-4 hover:text-cta hover:underline"
+                      className="mt-3 inline-block text-sm font-semibold text-cta underline-offset-4 hover:underline"
                     >
                       LinkedIn
                     </a>

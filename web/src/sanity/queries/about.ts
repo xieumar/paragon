@@ -22,7 +22,7 @@ const ABOUT_PAGE_QUERY = defineQuery(`
     values{
       eyebrow,
       heading,
-      items[]{ title, description }
+      items[]{ icon, title, description }
     },
     team{
       eyebrow,

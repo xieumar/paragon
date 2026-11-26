@@ -145,6 +145,24 @@ export type AboutPage = {
     eyebrow?: string;
     heading?: string;
     items?: Array<{
+      icon?:
+        | "ThumbsUp"
+        | "MousePointerClick"
+        | "Award"
+        | "MessageCircleQuestion"
+        | "Rocket"
+        | "ShieldCheck"
+        | "Lightbulb"
+        | "Users"
+        | "Target"
+        | "Heart"
+        | "Handshake"
+        | "Sparkles"
+        | "Gem"
+        | "Zap"
+        | "Globe"
+        | "Clock"
+        | "Palette";
       title?: string;
       description?: string;
       _type: "value";
@@ -488,7 +506,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/sanity/queries/about.ts
 // Variable: ABOUT_PAGE_QUERY
-// Query: *[_type == "aboutPage"] | order(_updatedAt desc)[0]{    header{      eyebrow,      heading,      intro,      image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }    },    story{      eyebrow,      heading,      body[]{   ...,  _type == "imageWithAlt" => {   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }    },    values{      eyebrow,      heading,      items[]{ title, description }    },    team{      eyebrow,      heading,      intro,      members[]->{        _id,        name,        role,        bio,        linkedin,        photo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }      }    },    ctaBand{ heading, text, cta{ label, href } },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
+// Query: *[_type == "aboutPage"] | order(_updatedAt desc)[0]{    header{      eyebrow,      heading,      intro,      image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }    },    story{      eyebrow,      heading,      body[]{   ...,  _type == "imageWithAlt" => {   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }    },    values{      eyebrow,      heading,      items[]{ icon, title, description }    },    team{      eyebrow,      heading,      intro,      members[]->{        _id,        name,        role,        bio,        linkedin,        photo{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} }      }    },    ctaBand{ heading, text, cta{ label, href } },    seo{   title,  description,  noindex,  image{   asset,  "alt": coalesce(alt, ""),  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "lqip": asset->metadata.lqip,  hotspot{x, y},  crop{top, bottom, left, right} } }  }
 export type ABOUT_PAGE_QUERY_RESULT = {
   header: {
     eyebrow: string | null;
@@ -560,6 +578,25 @@ export type ABOUT_PAGE_QUERY_RESULT = {
     eyebrow: string | null;
     heading: string | null;
     items: Array<{
+      icon:
+        | "Award"
+        | "Clock"
+        | "Gem"
+        | "Globe"
+        | "Handshake"
+        | "Heart"
+        | "Lightbulb"
+        | "MessageCircleQuestion"
+        | "MousePointerClick"
+        | "Palette"
+        | "Rocket"
+        | "ShieldCheck"
+        | "Sparkles"
+        | "Target"
+        | "ThumbsUp"
+        | "Users"
+        | "Zap"
+        | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -1031,7 +1068,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n  *[_type == "aboutPage"] | order(_updatedAt desc)[0]{\n    header{\n      eyebrow,\n      heading,\n      intro,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    story{\n      eyebrow,\n      heading,\n      body[]{ \n  ...,\n  _type == "imageWithAlt" => { \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n    },\n    values{\n      eyebrow,\n      heading,\n      items[]{ title, description }\n    },\n    team{\n      eyebrow,\n      heading,\n      intro,\n      members[]->{\n        _id,\n        name,\n        role,\n        bio,\n        linkedin,\n        photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n      }\n    },\n    ctaBand{ heading, text, cta{ label, href } },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
+    '\n  *[_type == "aboutPage"] | order(_updatedAt desc)[0]{\n    header{\n      eyebrow,\n      heading,\n      intro,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    story{\n      eyebrow,\n      heading,\n      body[]{ \n  ...,\n  _type == "imageWithAlt" => { \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n    },\n    values{\n      eyebrow,\n      heading,\n      items[]{ icon, title, description }\n    },\n    team{\n      eyebrow,\n      heading,\n      intro,\n      members[]->{\n        _id,\n        name,\n        role,\n        bio,\n        linkedin,\n        photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n      }\n    },\n    ctaBand{ heading, text, cta{ label, href } },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_type == "teamMember"] | order(coalesce(order, 100) asc, name asc){\n    _id,\n    name,\n    role,\n    bio,\n    linkedin,\n    photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n  }\n': TEAM_MEMBERS_QUERY_RESULT;
     '\n  *[_type == "homePage"] | order(_updatedAt desc)[0]{\n    heroSlides[]{\n      layout,\n      eyebrow,\n      headline,\n      subcopy,\n      cta{ label, href },\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n      badge\n    },\n    about{\n      eyebrow,\n      heading,\n      body,\n      highlights,\n      image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n      cta{ label, href }\n    },\n    servicesEyebrow,\n    servicesHeading,\n    servicesIntro,\n    featuredServices[]->{ \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n },\n    stats[]{ value, label },\n    clientLogos[]{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n },\n    featuredTestimonial->{\n      _id,\n      quote,\n      name,\n      role,\n      company,\n      photo{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n    },\n    faq{ eyebrow, heading, intro, items[]{ question, answer } },\n    ctaBand{ heading, text, cta{ label, href } },\n    seo{ \n  title,\n  description,\n  noindex,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n }\n  }\n': HOME_PAGE_QUERY_RESULT;
     '\n  *[_type == "service" && defined(slug.current)]\n    | order(coalesce(order, 100) asc, title asc){\n    \n  _id,\n  title,\n  "slug": slug.current,\n  summary,\n  image{ \n  asset,\n  "alt": coalesce(alt, ""),\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "lqip": asset->metadata.lqip,\n  hotspot{x, y},\n  crop{top, bottom, left, right}\n }\n\n  }\n': SERVICES_QUERY_RESULT;

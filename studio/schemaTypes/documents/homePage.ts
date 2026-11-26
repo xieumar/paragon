@@ -1,10 +1,12 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {singletonReadOnly} from '../singleton'
 
 /** Singleton: everything on the home page. */
 export const homePage = defineType({
   name: 'homePage',
   title: 'Home page',
   type: 'document',
+  readOnly: singletonReadOnly('homePage'),
   groups: [
     {name: 'hero', title: 'Hero', default: true},
     {name: 'about', title: 'About'},
